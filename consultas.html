@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6faf8">
+    <meta name="description" content="Gerencie suas consultas, visualize os próximos atendimentos e acompanhe o histórico dos seus pacientes no NUTRIQ.">
+    <title>Consultas | NUTRIQ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-layout">
+
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <a href="pagina1.html" class="dashboard-brand" aria-label="NUTRIQ - Página inicial">
+                <img src="img/logo (1).png" alt="Logo NUTRIQ">
+            </a>
+
+            <nav class="dashboard-navigation" aria-label="Navegação principal">
+                <a href="pagina1.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <a href="pacientes.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="10" cy="7" r="4"/>
+                        <path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>Meus pacientes</span>
+                </a>
+
+                <a href="planos-alimentares.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="3" width="14" height="18" rx="2"/>
+                        <path d="M9 3V1h6v2M9 8h6M9 12h6M9 16h4"/>
+                    </svg>
+                    <span>Planos alimentares</span>
+                </a>
+
+                <a href="calculadoras.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="2" width="14" height="20" rx="2"/>
+                        <path d="M9 6h6M8 11h2m4 0h2M8 15h2m4 0h2M8 18h8"/>
+                    </svg>
+                    <span>Calculadoras</span>
+                </a>
+
+                <a href="consultas.html" class="dashboard-nav-link active" aria-current="page">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                        <path d="M16 3v4M8 3v4M3 10h18"/>
+                    </svg>
+                    <span>Consultas</span>
+                </a>
+
+                <a href="agenda.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                        <path d="M16 3v4M8 3v4M3 10h18M8 14h2m4 0h2m-8 3h2"/>
+                    </svg>
+                    <span>Agenda</span>
+                </a>
+
+                <a href="relatorios.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 19V9h4v10M10 19V5h4v14M16 19V2h4v17M2 21h20"/>
+                    </svg>
+                    <span>Relatórios</span>
+                </a>
+            </nav>
+
+            <div class="dashboard-plan-card">
+                <div class="dashboard-plan-heading">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m12 3 2.4 4.8 5.3.8-3.8 3.7.9 5.3-4.8-2.5-4.8 2.5.9-5.3-3.8-3.7 5.3-.8z"/>
+                    </svg>
+                    <div>
+                        <span>Seu plano</span>
+                        <strong>Profissional</strong>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="dashboard-plan-button"
+                    id="btnVerPlanos"
+                    aria-haspopup="dialog"
+                    aria-controls="modalPlanos"
+                >
+                    Ver planos
+                    <span aria-hidden="true">→</span>
+                </button>
+            </div>
+        </aside>
+
+        <div class="dashboard-main">
+
+            <header class="dashboard-topbar">
+                <button
+                    class="dashboard-menu-toggle"
+                    id="dashboardMenuToggle"
+                    type="button"
+                    aria-label="Abrir menu"
+                    aria-expanded="false"
+                    aria-controls="dashboardSidebar"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <button
+                    type="button"
+                    id="alternarBarraLateral"
+                    class="sidebar-toggle-button"
+                    aria-label="Esconder barra lateral"
+                    aria-expanded="true"
+                    title="Esconder barra lateral">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                        <path d="M9 4v16"></path>
+                        <path d="m15 9-3 3 3 3"></path>
+                    </svg>
+                </button>
+
+                <form class="dashboard-search" id="dashboardSearch" role="search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"/>
+                        <path d="m16 16 4 4"/>
+                    </svg>
+                    <input
+                        type="search"
+                        id="campoBusca"
+                        placeholder="Buscar pacientes..."
+                        aria-label="Buscar pacientes"
+                    >
+                </form>
+
+                <div class="dashboard-topbar-actions">
+                    <button
+                        class="dashboard-icon-button"
+                        id="btnNotificacoes"
+                        type="button"
+                        aria-label="Notificações"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+                        </svg>
+                    </button>
+
+                    <a
+                        href="perfil.html"
+                        class="dashboard-profile-button"
+                        aria-label="Abrir perfil profissional"
+                    >
+                        <span class="dashboard-avatar dashboard-avatar-professional">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21a8 8 0 0 1 16 0"/>
+                            </svg>
+                        </span>
+                        <span class="dashboard-profile-details">
+                            <strong id="professionalName">Meu perfil</strong>
+                            <span>Nutricionista</span>
+                        </span>
+                    </a>
+                </div>
+            </header>
+
+            <main class="dashboard-content pac-page" id="conteudoPrincipal">
+
+                <header class="pac-header">
+                    <div class="pac-header-title">
+                        <span class="pac-header-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M16 3v4M8 3v4M3 10h18"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <h1>Consultas</h1>
+                            <p>Gerencie suas consultas, visualize os próximos atendimentos e acompanhe o histórico dos seus pacientes.</p>
+                        </div>
+                    </div>
+
+                    <button type="button" class="pac-btn pac-btn-primary" data-abrir-consulta>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                        Nova consulta
+                    </button>
+                </header>
+
+                <section class="pac-stats" aria-label="Resumo das consultas">
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M16 3v4M8 3v4M3 10h18"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Total de consultas</span>
+                            <strong id="statTotal">0</strong>
+                            <small>Consultas realizadas</small>
+                        </div>
+                    </article>
+
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21a8 8 0 0 1 16 0"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Próximas consultas</span>
+                            <strong id="statProximas">0</strong>
+                            <small>Agendamentos futuros</small>
+                        </div>
+                    </article>
+
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21a8 8 0 0 1 16 0"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Pacientes atendidos</span>
+                            <strong id="statAtendidos">0</strong>
+                            <small>Pacientes únicos</small>
+                        </div>
+                    </article>
+
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Avaliação média</span>
+                            <strong id="statAvaliacao">—</strong>
+                            <small>Baseada nas avaliações dos pacientes</small>
+                        </div>
+                    </article>
+                </section>
+
+                <div class="cs-grid">
+
+                    <div class="cs-column">
+
+                        <section class="cs-panel" aria-labelledby="csProximasTitulo">
+                            <div class="cs-panel-heading">
+                                <h2 id="csProximasTitulo">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                        <path d="M16 3v4M8 3v4M3 10h18"/>
+                                    </svg>
+                                    Próximas consultas
+                                </h2>
+                                <button type="button" class="cs-link" id="btnVerTodasProximas" aria-expanded="false" hidden>Ver todas <span aria-hidden="true">→</span></button>
+                            </div>
+
+                            <div class="cs-empty" id="csProximasVazio">
+                                <span class="cs-empty-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                        <path d="M16 3v4M8 3v4M3 10h18M9 15.500l2 2 4-4"/>
+                                    </svg>
+                                </span>
+                                <strong>Nenhuma consulta agendada.</strong>
+                                <p>Agende uma nova consulta para começar.</p>
+                                <button type="button" class="pac-btn pac-btn-primary cs-btn-small" data-abrir-consulta>
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                                    Nova consulta
+                                </button>
+                            </div>
+
+                            <div class="cs-semresultado" id="csProximasSemResultado" hidden>Nenhuma consulta encontrada para essa busca.</div>
+                            <ul class="cs-list" id="listaProximas" hidden></ul>
+                        </section>
+
+                        <section class="cs-panel" aria-labelledby="csHistoricoTitulo">
+                            <div class="cs-panel-heading">
+                                <h2 id="csHistoricoTitulo">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
+                                        <path d="M3 3v5h5M12 7v5l3 2"/>
+                                    </svg>
+                                    Histórico de consultas
+                                </h2>
+                                <button type="button" class="cs-link" id="btnVerTodosHistorico" aria-expanded="false" hidden>Ver todas <span aria-hidden="true">→</span></button>
+                            </div>
+
+                            <div class="cs-empty" id="csHistoricoVazio">
+                                <span class="cs-empty-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+                                        <path d="M14 3v6h6M8 13h8M8 17h5"/>
+                                    </svg>
+                                </span>
+                                <strong>Nenhuma consulta encontrada.</strong>
+                                <p>O histórico de consultas aparecerá aqui.</p>
+                            </div>
+
+                            <div class="cs-semresultado" id="csHistoricoSemResultado" hidden>Nenhuma consulta encontrada para essa busca.</div>
+                            <ul class="cs-list" id="listaHistorico" hidden></ul>
+                        </section>
+                    </div>
+
+                    <div class="cs-column">
+
+                        <section class="cs-panel" aria-labelledby="csAtendimentosTitulo">
+                            <div class="cs-panel-heading">
+                                <h2 id="csAtendimentosTitulo">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                        <path d="M16 3v4M8 3v4M3 10h18"/>
+                                    </svg>
+                                    Próximos atendimentos
+                                </h2>
+                                <a href="agenda.html" class="cs-link">Ver agenda <span aria-hidden="true">→</span></a>
+                            </div>
+
+                            <div class="cs-empty" id="csAtendimentosVazio">
+                                <span class="cs-empty-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="8" r="4"/>
+                                        <path d="M4 21a8 8 0 0 1 16 0"/>
+                                    </svg>
+                                </span>
+                                <strong>Nenhum atendimento agendado</strong>
+                                <p>Sua agenda está livre.</p>
+                            </div>
+
+                            <ul class="cs-list cs-list-compact" id="listaAtendimentos" hidden></ul>
+                        </section>
+
+                        <section class="cs-panel" aria-labelledby="csAtalhosTitulo">
+                            <div class="cs-panel-heading">
+                                <h2 id="csAtalhosTitulo">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M13 2 4 14h7l-1 8 9-12h-7z"/>
+                                    </svg>
+                                    Atalhos rápidos
+                                </h2>
+                            </div>
+
+                            <nav class="cs-shortcuts" aria-label="Atalhos rápidos">
+                                <button type="button" class="cs-shortcut" data-abrir-consulta>
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                        <path d="M16 3v4M8 3v4M3 10h18M12 13v5M9.500 15.500h5"/>
+                                    </svg>
+                                    <span>Nova consulta</span>
+                                    <i aria-hidden="true">→</i>
+                                </button>
+                                <a href="pacientes.html" class="cs-shortcut">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="10" cy="7" r="4"/>
+                                        <path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                                    </svg>
+                                    <span>Ver pacientes</span>
+                                    <i aria-hidden="true">→</i>
+                                </a>
+                                <a href="agenda.html" class="cs-shortcut">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                        <path d="M16 3v4M8 3v4M3 10h18M8 14h2m4 0h2m-8 3h2"/>
+                                    </svg>
+                                    <span>Ver agenda</span>
+                                    <i aria-hidden="true">→</i>
+                                </a>
+                                <a href="planos-alimentares.html" class="cs-shortcut">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+                                        <path d="M14 3v6h6M8 13h8M8 17h5"/>
+                                    </svg>
+                                    <span>Ver planos alimentares</span>
+                                    <i aria-hidden="true">→</i>
+                                </a>
+                            </nav>
+                        </section>
+                    </div>
+                </div>
+
+                <footer class="pac-footer">
+                    <p>© 2026 NUTRIQ · Painel profissional</p>
+                    <p class="pac-footer-slogan">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 4c-9 0-15 4-15 11 0 2 .6 3.8 1.6 5C7.2 14 11 11 15 9c-3.5 2.5-6 5.5-7.5 9.5C9 19.5 10.4 20 12 20c6 0 8-6 8-16z"/>
+                        </svg>
+                        Mais saúde, mais vida.
+                    </p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <div id="dashboardFeedback" role="status" aria-live="polite"></div>
+
+    <div class="nq-overlay" id="modalNovaConsulta" hidden>
+        <section class="nq-modal" role="dialog" aria-modal="true" aria-labelledby="csModalTitulo">
+            <header class="nq-modal-header">
+                <div>
+                    <h2 id="csModalTitulo">Nova consulta</h2>
+                    <p>Escolha o paciente e o horário do atendimento.</p>
+                </div>
+                <button type="button" class="nq-close" data-fechar aria-label="Fechar">&times;</button>
+            </header>
+
+            <div class="nq-aviso" id="csSemPacientes" hidden>
+                Cadastre um paciente antes de agendar uma consulta.
+                <a href="pacientes.html?novo=1">Cadastrar paciente</a>
+            </div>
+
+            <form id="formConsulta" novalidate>
+                <input type="hidden" id="csId">
+                <div class="nq-form-grid">
+                    <div class="nq-field nq-span-2">
+                        <label for="csPaciente">Paciente</label>
+                        <select id="csPaciente" required>
+                            <option value="">Selecione o paciente</option>
+                        </select>
+                        <span class="nq-error" data-erro-para="csPaciente"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="csData">Data</label>
+                        <input type="date" id="csData" required>
+                        <span class="nq-error" data-erro-para="csData"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="csHora">Horário</label>
+                        <input type="time" id="csHora" required>
+                        <span class="nq-error" data-erro-para="csHora"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="csTipo">Tipo de consulta</label>
+                        <select id="csTipo">
+                            <option>Primeira consulta</option>
+                            <option>Retorno</option>
+                            <option>Avaliação nutricional</option>
+                            <option>Consulta online</option>
+                        </select>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="csStatus">Situação</label>
+                        <select id="csStatus">
+                            <option value="agendada">Agendada</option>
+                            <option value="realizada">Realizada</option>
+                            <option value="cancelada">Cancelada</option>
+                        </select>
+                    </div>
+
+                    <div class="nq-field nq-span-2" id="csAvaliacaoGrupo" hidden>
+                        <label for="csAvaliacao">Avaliação do paciente <span class="nq-opcional">(opcional)</span></label>
+                        <select id="csAvaliacao">
+                            <option value="">Sem avaliação</option>
+                            <option value="5">5 – Excelente</option>
+                            <option value="4">4 – Muito bom</option>
+                            <option value="3">3 – Bom</option>
+                            <option value="2">2 – Regular</option>
+                            <option value="1">1 – Ruim</option>
+                        </select>
+                        <span class="nq-error" data-erro-para="csAvaliacao"></span>
+                    </div>
+
+                    <div class="nq-field nq-span-2">
+                        <label for="csObs">Observações <span class="nq-opcional">(opcional)</span></label>
+                        <textarea id="csObs" rows="3" maxlength="1000" placeholder="Anotações para o atendimento..."></textarea>
+                    </div>
+                </div>
+
+                <footer class="nq-actions">
+                    <button type="button" class="pac-btn nq-btn-ghost" data-fechar>Cancelar</button>
+                    <button type="submit" class="pac-btn pac-btn-primary" id="csSalvar">Agendar consulta</button>
+                </footer>
+            </form>
+        </section>
+    </div>
+
+    <div class="plans-modal-overlay" id="modalPlanos" aria-hidden="true">
+        <section class="plans-modal" role="dialog" aria-modal="true" aria-labelledby="planosTitulo">
+            <header class="plans-modal-header">
+                <div>
+                    <span class="plans-modal-eyebrow">NUTRIQ</span>
+                    <h2 id="planosTitulo">Conheça nossos planos</h2>
+                    <p>Encontre a opção ideal para sua rotina profissional.</p>
+                </div>
+                <button type="button" class="plans-modal-close" id="fecharModalPlanos" aria-label="Fechar janela de planos">&times;</button>
+            </header>
+
+            <div class="plans-grid">
+                <article class="plans-option">
+                    <div class="plans-option-icon" aria-hidden="true">🌱</div>
+                    <h3>Essencial</h3>
+                    <p class="plans-option-description">Para quem está começando.</p>
+                    <ul>
+                        <li>Cadastro de pacientes</li>
+                        <li>Organização de consultas</li>
+                        <li>Calculadoras nutricionais</li>
+                    </ul>
+                    <span class="plans-option-footer">Conheça esta opção</span>
+                </article>
+
+                <article class="plans-option plans-option-featured">
+                    <span class="plans-current-label">Seu plano atual</span>
+                    <div class="plans-option-icon" aria-hidden="true">✦</div>
+                    <h3>Profissional</h3>
+                    <p class="plans-option-description">Para o acompanhamento do consultório.</p>
+                    <ul>
+                        <li>Gestão de pacientes</li>
+                        <li>Planos alimentares e avaliações</li>
+                        <li>Organização da agenda</li>
+                        <li>Relatórios do consultório</li>
+                    </ul>
+                    <span class="plans-option-footer">Plano selecionado</span>
+                </article>
+
+                <article class="plans-option">
+                    <div class="plans-option-icon" aria-hidden="true">✚</div>
+                    <h3>Clínica</h3>
+                    <p class="plans-option-description">Para equipes e consultórios em expansão.</p>
+                    <ul>
+                        <li>Organização do consultório</li>
+                        <li>Acompanhamento de pacientes</li>
+                        <li>Recursos para equipes</li>
+                    </ul>
+                    <span class="plans-option-footer">Conheça esta opção</span>
+                </article>
+            </div>
+
+            <p class="plans-modal-note">
+                Os detalhes comerciais e os preços dos planos devem ser
+                definidos conforme as opções oferecidas pelo NUTRIQ.
+            </p>
+        </section>
+    </div>
+
+    <script src="js/demo-storage.js" defer></script>
+    <script src="js/api.js" defer></script>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/database.js" defer></script>
+    <script src="js/pages/dashboard.js" defer></script>
+    <script src="js/navegacao.js" defer></script>
+    <script src="js/nutriq-dados.js" defer></script>
+    <script src="js/pages/consultas.js" defer></script>
+</body>
+</html>

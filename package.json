@@ -1,0 +1,20 @@
+{
+  "name": "nutriq",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NUTRIQ - plataforma para nutricionistas",
+  "main": "servidor/servidor.js",
+  "scripts": {
+    "start": "node servidor/servidor.js",
+    "start:sem-banco": "node -e \"process.env.NUTRIQ_MODO_SEM_BANCO='true'; require('./servidor/servidor.js')\"",
+    "start:demo": "node -e \"process.env.NUTRIQ_MODO_DEMO='true'; require('./servidor/servidor.js')\""
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "mysql2": "3.24.6",
+    "nodemailer": "10.5.0"
+  }
+}

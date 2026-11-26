@@ -1,0 +1,60 @@
+
+
+.pln-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--pac-border);
+}
+
+.pln-toolbar[hidden] {
+    display: none;
+}
+
+.pln-filters {
+    display: inline-flex;
+    gap: 6px;
+    padding: 4px;
+    background: #f1f6f4;
+    border-radius: 10px;
+}
+
+.pln-filter {
+    min-height: 34px;
+    padding: 0 16px;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    color: var(--pac-muted);
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pln-filter:hover {
+    color: var(--pac-green);
+}
+
+.pln-filter.is-active {
+    background: #fff;
+    color: var(--pac-green);
+    box-shadow: 0 1px 4px rgba(26, 58, 49, 0.1);
+}
+
+.pln-count {
+    color: var(--pac-muted);
+    font-size: 13px;
+}
+
+.pln-plan-name strong {
+    display: block;
+    font-weight: 650;
+}
+
+.pln-plan-name small {
+    color: var(--pac-muted);
+}

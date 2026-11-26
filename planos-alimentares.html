@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6faf8">
+    <meta name="description" content="Crie, gerencie e visualize os planos alimentares dos seus pacientes no painel NUTRIQ.">
+    <title>Planos alimentares | NUTRIQ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-layout">
+
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <a href="pagina1.html" class="dashboard-brand" aria-label="NUTRIQ - Página inicial">
+                <img src="img/logo (1).png" alt="Logo NUTRIQ">
+            </a>
+
+            <nav class="dashboard-navigation" aria-label="Navegação principal">
+                <a href="pagina1.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <a href="pacientes.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="10" cy="7" r="4"/>
+                        <path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>Meus pacientes</span>
+                </a>
+
+                <a href="planos-alimentares.html" class="dashboard-nav-link active" aria-current="page">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="3" width="14" height="18" rx="2"/>
+                        <path d="M9 3V1h6v2M9 8h6M9 12h6M9 16h4"/>
+                    </svg>
+                    <span>Planos alimentares</span>
+                </a>
+
+                <a href="calculadoras.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="5" y="2" width="14" height="20" rx="2"/>
+                        <path d="M9 6h6M8 11h2m4 0h2M8 15h2m4 0h2M8 18h8"/>
+                    </svg>
+                    <span>Calculadoras</span>
+                </a>
+
+                <a href="consultas.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                        <path d="M16 3v4M8 3v4M3 10h18"/>
+                    </svg>
+                    <span>Consultas</span>
+                </a>
+
+                <a href="agenda.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                        <path d="M16 3v4M8 3v4M3 10h18M8 14h2m4 0h2m-8 3h2"/>
+                    </svg>
+                    <span>Agenda</span>
+                </a>
+
+                <a href="relatorios.html" class="dashboard-nav-link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 19V9h4v10M10 19V5h4v14M16 19V2h4v17M2 21h20"/>
+                    </svg>
+                    <span>Relatórios</span>
+                </a>
+            </nav>
+
+            <div class="dashboard-plan-card">
+                <div class="dashboard-plan-heading">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m12 3 2.4 4.8 5.3.8-3.8 3.7.9 5.3-4.8-2.5-4.8 2.5.9-5.3-3.8-3.7 5.3-.8z"/>
+                    </svg>
+                    <div>
+                        <span>Seu plano</span>
+                        <strong>Profissional</strong>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="dashboard-plan-button"
+                    id="btnVerPlanos"
+                    aria-haspopup="dialog"
+                    aria-controls="modalPlanos"
+                >
+                    Ver planos
+                    <span aria-hidden="true">→</span>
+                </button>
+            </div>
+        </aside>
+
+        <div class="dashboard-main">
+
+            <header class="dashboard-topbar">
+                <button
+                    class="dashboard-menu-toggle"
+                    id="dashboardMenuToggle"
+                    type="button"
+                    aria-label="Abrir menu"
+                    aria-expanded="false"
+                    aria-controls="dashboardSidebar"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <button
+                    type="button"
+                    id="alternarBarraLateral"
+                    class="sidebar-toggle-button"
+                    aria-label="Esconder barra lateral"
+                    aria-expanded="true"
+                    title="Esconder barra lateral">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                        <path d="M9 4v16"></path>
+                        <path d="m15 9-3 3 3 3"></path>
+                    </svg>
+                </button>
+
+                <form class="dashboard-search" id="dashboardSearch" role="search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"/>
+                        <path d="m16 16 4 4"/>
+                    </svg>
+                    <input
+                        type="search"
+                        id="campoBusca"
+                        placeholder="Buscar pacientes..."
+                        aria-label="Buscar pacientes"
+                    >
+                </form>
+
+                <div class="dashboard-topbar-actions">
+                    <button
+                        class="dashboard-icon-button"
+                        id="btnNotificacoes"
+                        type="button"
+                        aria-label="Notificações"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+                        </svg>
+                    </button>
+
+                    <a
+                        href="perfil.html"
+                        class="dashboard-profile-button"
+                        aria-label="Abrir perfil profissional"
+                    >
+                        <span class="dashboard-avatar dashboard-avatar-professional">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21a8 8 0 0 1 16 0"/>
+                            </svg>
+                        </span>
+                        <span class="dashboard-profile-details">
+                            <strong id="professionalName">Meu perfil</strong>
+                            <span>Nutricionista</span>
+                        </span>
+                    </a>
+                </div>
+            </header>
+
+            <main class="dashboard-content pac-page" id="conteudoPrincipal">
+
+                <header class="pac-header">
+                    <div class="pac-header-title">
+                        <span class="pac-header-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+                                <path d="M14 3v6h6M8 13h8M8 17h5"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <h1>Planos alimentares</h1>
+                            <p>Crie, gerencie e visualize os planos alimentares dos seus pacientes.</p>
+                        </div>
+                    </div>
+
+                    <button type="button" class="pac-btn pac-btn-primary" data-abrir-plano>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                        Novo plano alimentar
+                    </button>
+                </header>
+
+                <section class="pac-stats" aria-label="Resumo dos planos alimentares">
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+                                <path d="M14 3v6h6M8 13h8M8 17h5"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Total de planos</span>
+                            <strong id="statTotal">0</strong>
+                            <small>Planos criados</small>
+                        </div>
+                    </article>
+
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21a8 8 0 0 1 16 0"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Pacientes com planos</span>
+                            <strong id="statPacientes">0</strong>
+                            <small>Pacientes vinculados</small>
+                        </div>
+                    </article>
+
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21c-4.500 0-7-3-7-7 0-5 7-11 7-11s7 6 7 11c0 4-2.500 7-7 7z"/>
+                                <path d="M12 21v-8"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Planos ativos</span>
+                            <strong id="statAtivos">0</strong>
+                            <small>Em andamento</small>
+                        </div>
+                    </article>
+
+                    <article class="pac-stat-card">
+                        <span class="pac-stat-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="m8 12 3 3 5-6"/>
+                            </svg>
+                        </span>
+                        <div class="pac-stat-info">
+                            <span class="pac-stat-label">Planos concluídos</span>
+                            <strong id="statConcluidos">0</strong>
+                            <small>Finalizados</small>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="pac-panel" aria-label="Lista de planos alimentares">
+
+                    <div class="pln-toolbar" id="plnToolbar" hidden>
+                        <div class="pln-filters" role="group" aria-label="Filtrar por situação">
+                            <button type="button" class="pln-filter is-active" data-filtro="todos" aria-pressed="true">Todos</button>
+                            <button type="button" class="pln-filter" data-filtro="ativo" aria-pressed="false">Ativos</button>
+                            <button type="button" class="pln-filter" data-filtro="concluido" aria-pressed="false">Concluídos</button>
+                        </div>
+                        <span class="pln-count" id="plnCount" aria-live="polite"></span>
+                    </div>
+
+                    <div class="pac-empty" id="plnEmpty">
+                        <span class="pac-empty-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+                                <path d="M14 3v6h6M8 13h8M8 17h5"/>
+                            </svg>
+                        </span>
+                        <h2>Nenhum plano alimentar cadastrado.</h2>
+                        <p>Crie seu primeiro plano alimentar para começar a acompanhar seus pacientes.</p>
+                        <button type="button" class="pac-btn pac-btn-primary" data-abrir-plano>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                            Novo plano alimentar
+                        </button>
+                    </div>
+
+                    <div class="pac-empty" id="plnNoResults" hidden>
+                        <span class="pac-empty-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+                        </span>
+                        <h2>Nenhum plano encontrado.</h2>
+                        <p>Revise a busca ou troque o filtro para ver outros planos.</p>
+                    </div>
+
+                    <div class="pac-table-wrap" id="plnTableWrap" hidden>
+                        <table class="pac-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Plano</th>
+                                    <th scope="col">Paciente</th>
+                                    <th scope="col">Período</th>
+                                    <th scope="col">Meta diária</th>
+                                    <th scope="col">Situação</th>
+                                    <th scope="col"><span class="pac-sr-only">Ações</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="listaPlanos"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <footer class="pac-footer">
+                    <p>© 2026 NUTRIQ · Painel profissional</p>
+                    <p class="pac-footer-slogan">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 4c-9 0-15 4-15 11 0 2 .6 3.8 1.6 5C7.2 14 11 11 15 9c-3.5 2.5-6 5.5-7.5 9.5C9 19.5 10.4 20 12 20c6 0 8-6 8-16z"/>
+                        </svg>
+                        Mais saúde, mais vida.
+                    </p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <div id="dashboardFeedback" role="status" aria-live="polite"></div>
+
+    <div class="nq-overlay" id="modalNovoPlano" hidden>
+        <section class="nq-modal" role="dialog" aria-modal="true" aria-labelledby="plnModalTitulo">
+            <header class="nq-modal-header">
+                <div>
+                    <h2 id="plnModalTitulo">Novo plano alimentar</h2>
+                    <p>Preencha os dados básicos. Você poderá detalhar as refeições depois.</p>
+                </div>
+                <button type="button" class="nq-close" data-fechar aria-label="Fechar">&times;</button>
+            </header>
+
+            <div class="nq-aviso" id="plnSemPacientes" hidden>
+                Cadastre um paciente antes de criar um plano alimentar.
+                <a href="pacientes.html?novo=1">Cadastrar paciente</a>
+            </div>
+
+            <form id="formPlano" novalidate>
+                <input type="hidden" id="plnId">
+                <div class="nq-form-grid">
+                    <div class="nq-field nq-span-2">
+                        <label for="plnNome">Nome do plano</label>
+                        <input type="text" id="plnNome" maxlength="120" placeholder="Ex.: Reeducação alimentar – fase 1" autocomplete="off" required>
+                        <span class="nq-error" data-erro-para="plnNome"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnPaciente">Paciente</label>
+                        <select id="plnPaciente" required>
+                            <option value="">Selecione o paciente</option>
+                        </select>
+                        <span class="nq-error" data-erro-para="plnPaciente"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnObjetivo">Objetivo</label>
+                        <select id="plnObjetivo">
+                            <option>Emagrecimento</option>
+                            <option>Ganho de massa muscular</option>
+                            <option>Manutenção do peso</option>
+                            <option>Reeducação alimentar</option>
+                            <option>Controle clínico</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnInicio">Início</label>
+                        <input type="date" id="plnInicio" required>
+                        <span class="nq-error" data-erro-para="plnInicio"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnFim">Término previsto <span class="nq-opcional">(opcional)</span></label>
+                        <input type="date" id="plnFim">
+                        <span class="nq-error" data-erro-para="plnFim"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnCalorias">Meta diária em kcal <span class="nq-opcional">(opcional)</span></label>
+                        <input type="number" id="plnCalorias" min="500" max="6000" step="10" inputmode="numeric" placeholder="Ex.: 1800">
+                        <span class="nq-error" data-erro-para="plnCalorias"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnStatus">Situação</label>
+                        <select id="plnStatus">
+                            <option value="ativo">Em andamento</option>
+                            <option value="concluido">Concluído</option>
+                        </select>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnCarb">Carboidratos em g/dia <span class="nq-opcional">(opcional)</span></label>
+                        <input type="number" id="plnCarb" min="0" max="1500" step="1" inputmode="numeric">
+                        <span class="nq-error" data-erro-para="plnCarb"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnProt">Proteínas em g/dia <span class="nq-opcional">(opcional)</span></label>
+                        <input type="number" id="plnProt" min="0" max="1500" step="1" inputmode="numeric">
+                        <span class="nq-error" data-erro-para="plnProt"></span>
+                    </div>
+
+                    <div class="nq-field">
+                        <label for="plnGord">Gorduras em g/dia <span class="nq-opcional">(opcional)</span></label>
+                        <input type="number" id="plnGord" min="0" max="1500" step="1" inputmode="numeric">
+                        <span class="nq-error" data-erro-para="plnGord"></span>
+                    </div>
+
+                    <p class="nq-help" id="plnKcalAuto">Os macronutrientes alimentam o gráfico do relatório do paciente.</p>
+
+                    <div class="nq-field nq-span-2">
+                        <label for="plnObs">Observações <span class="nq-opcional">(opcional)</span></label>
+                        <textarea id="plnObs" rows="3" maxlength="1000" placeholder="Restrições, preferências, orientações gerais..."></textarea>
+                    </div>
+                </div>
+
+                <footer class="nq-actions">
+                    <button type="button" class="pac-btn nq-btn-ghost" data-fechar>Cancelar</button>
+                    <button type="submit" class="pac-btn pac-btn-primary" id="plnSalvar">Salvar plano</button>
+                </footer>
+            </form>
+        </section>
+    </div>
+
+    <div class="plans-modal-overlay" id="modalPlanos" aria-hidden="true">
+        <section class="plans-modal" role="dialog" aria-modal="true" aria-labelledby="planosTitulo">
+            <header class="plans-modal-header">
+                <div>
+                    <span class="plans-modal-eyebrow">NUTRIQ</span>
+                    <h2 id="planosTitulo">Conheça nossos planos</h2>
+                    <p>Encontre a opção ideal para sua rotina profissional.</p>
+                </div>
+                <button type="button" class="plans-modal-close" id="fecharModalPlanos" aria-label="Fechar janela de planos">&times;</button>
+            </header>
+
+            <div class="plans-grid">
+                <article class="plans-option">
+                    <div class="plans-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+                    <h3>Essencial</h3>
+                    <p class="plans-option-description">Para quem está começando.</p>
+                    <ul>
+                        <li>Cadastro de pacientes</li>
+                        <li>Organização de consultas</li>
+                        <li>Calculadoras nutricionais</li>
+                    </ul>
+                    <span class="plans-option-footer">Conheça esta opção</span>
+                </article>
+
+                <article class="plans-option plans-option-featured">
+                    <span class="plans-current-label">Seu plano atual</span>
+                    <div class="plans-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.4 4.8 5.3.8-3.8 3.7.9 5.3-4.8-2.5-4.8 2.5.9-5.3-3.8-3.7 5.3-.8z"/></svg></div>
+                    <h3>Profissional</h3>
+                    <p class="plans-option-description">Para o acompanhamento do consultório.</p>
+                    <ul>
+                        <li>Gestão de pacientes</li>
+                        <li>Planos alimentares e avaliações</li>
+                        <li>Organização da agenda</li>
+                        <li>Relatórios do consultório</li>
+                    </ul>
+                    <span class="plans-option-footer">Plano selecionado</span>
+                </article>
+
+                <article class="plans-option">
+                    <div class="plans-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h.01M15 10h.01M9 14h.01M15 14h.01M10 21v-3h4v3"/></svg></div>
+                    <h3>Clínica</h3>
+                    <p class="plans-option-description">Para equipes e consultórios em expansão.</p>
+                    <ul>
+                        <li>Organização do consultório</li>
+                        <li>Acompanhamento de pacientes</li>
+                        <li>Recursos para equipes</li>
+                    </ul>
+                    <span class="plans-option-footer">Conheça esta opção</span>
+                </article>
+            </div>
+
+            <p class="plans-modal-note">
+                Os detalhes comerciais e os preços dos planos devem ser
+                definidos conforme as opções oferecidas pelo NUTRIQ.
+            </p>
+        </section>
+    </div>
+
+    <script src="js/demo-storage.js" defer></script>
+    <script src="js/api.js" defer></script>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/database.js" defer></script>
+    <script src="js/pages/dashboard.js" defer></script>
+    <script src="js/navegacao.js" defer></script>
+    <script src="js/nutriq-dados.js" defer></script>
+    <script src="js/pages/planos-alimentares.js" defer></script>
+</body>
+</html>
