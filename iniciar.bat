@@ -1,48 +1,51 @@
+
 @echo off
+setlocal
 chcp 65001 >nul
-title NUTRIQ - Servidor local
+title NUTRIQ - Servidor de Demonstracao
+
 cd /d "%~dp0"
 
 where node >nul 2>nul
 if errorlevel 1 (
-    echo.
-    echo  Node.js nao foi encontrado neste computador.
-    echo  Instale a versao LTS em https://nodejs.org e execute este arquivo novamente.
-    echo.
+    echo Node.js nao encontrado. Instale em https://nodejs.org
     pause
     exit /b 1
 )
 
-for /f "tokens=1 delims=v." %%v in ('node -v') do set NODE_MAJOR=%%v
-if %NODE_MAJOR% LSS 21 (
-    echo.
-    echo  E necessario o Node.js 21 ou superior. Versao instalada:
+node -e "const [a,b]=process.versions.node.split('.').map(Number);process.exit(a>20||(a===20&&b>=12)?0:1)"
+if errorlevel 1 (
+    echo Necessario Node.js 20.12 ou superior.
     node -v
-    echo.
     pause
     exit /b 1
 )
 
-if not exist ".env" if exist ".env.example" copy ".env.example" ".env" >nul
+if not exist ".env" (
+    if exist ".env.example" copy ".env.example" ".env" >nul
+)
 
-if not exist "node_modules\mysql2" (
-    echo.
-    echo  Instalando dependencias, aguarde...
+if not exist "node_modules\express" (
+    echo Instalando dependencias...
     call npm install --no-audit --no-fund
     if errorlevel 1 (
-        echo.
-        echo  Nao foi possivel instalar as dependencias. Verifique a conexao com a internet.
-        echo.
+        echo Erro ao instalar dependencias.
         pause
         exit /b 1
     )
 )
 
-set PORTA=3000
-for /f "tokens=2 delims==" %%p in ('findstr /b /c:"PORT=" .env 2^>nul') do set PORTA=%%p
+set "NUTRIQ_MODO_DEMO=true"
 
-start "" /b cmd /c "timeout /t 6 /nobreak >nul & start http://localhost:%PORTA%"
+echo.
+echo Iniciando NUTRIQ em modo de demonstracao...
+echo Endereco: http://localhost:3000
+echo.
+
+start "" cmd /c "timeout /t 5 /nobreak >nul & start http://localhost:3000"
+
 node servidor\servidor.js
 
 echo.
+echo Servidor encerrado.
 pause
