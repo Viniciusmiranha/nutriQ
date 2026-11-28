@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.getElementById("dashboardSidebar");
     const menuToggle = document.getElementById("dashboardMenuToggle");
-    const mobileMenu = window.matchMedia("(max-width: 1050px)");
+    const mobileMenu = window.matchMedia("(max-width: 1051px)");
     const backdrop = document.createElement("div");
     backdrop.className = "dashboard-menu-backdrop";
     backdrop.hidden = true;

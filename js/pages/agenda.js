@@ -228,9 +228,9 @@ function rotuloPeriodo() {
     }
 
 function renderizarDia(mapa) {
-        el.diaData.textContent = capitalizar(
-            formatar(cursor, { weekday: "long", day: "numeric", month: "long", year: "numeric" })
-        );
+        el.diaData.textContent = mesmoDia(cursor, hoje())
+            ? "Hoje"
+            : capitalizar(formatar(cursor, { weekday: "long", day: "numeric", month: "long", year: "numeric" }));
 
         var lista = mapa[iso(cursor)] || [];
         var tem = lista.length > 0;

@@ -584,7 +584,7 @@ window.addEventListener(
   const botao = document.getElementById("alternarBarraLateral");
   const pagina = document.querySelector(".dashboard-page");
   const chave = "nutriqBarraLateralOculta";
-    const desktop = window.matchMedia("(min-width: 1051px)");
+    const mobileMenu = window.matchMedia("(max-width: 1051px)");
 
   if (!botao || !pagina) return;
 
@@ -598,20 +598,21 @@ window.addEventListener(
   }
 
     function sincronizar() {
-        botao.hidden = !desktop.matches;
-        botao.setAttribute("aria-hidden", String(!desktop.matches));
-        botao.tabIndex = desktop.matches ? 0 : -1;
+        const desktop = !mobileMenu.matches;
+        botao.hidden = !desktop;
+        botao.setAttribute("aria-hidden", String(!desktop));
+        botao.tabIndex = desktop ? 0 : -1;
         let oculta = false;
-        try { oculta = desktop.matches && localStorage.getItem(chave) === "true"; } catch {}
+        try { oculta = desktop && localStorage.getItem(chave) === "true"; } catch {}
         pagina.classList.toggle("sidebar-collapsed", oculta);
         atualizarBotao(oculta);
     }
 
     sincronizar();
-    desktop.addEventListener("change", sincronizar);
+    mobileMenu.addEventListener("change", sincronizar);
 
   botao.addEventListener("click", () => {
-        if (!desktop.matches) return;
+        if (mobileMenu.matches) return;
         const oculta = !pagina.classList.contains("sidebar-collapsed");
 
     pagina.classList.toggle("sidebar-collapsed", oculta);

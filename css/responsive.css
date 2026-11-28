@@ -872,7 +872,7 @@
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1051px) {
     .sidebar-toggle-button {
         display: none !important;
     }
@@ -899,6 +899,7 @@
     }
 
     .dashboard-sidebar.is-open {
+        z-index: 2000;
         transform: translateX(0);
         box-shadow: 12px 0 35px rgba(20, 43, 36, 0.13);
     }
